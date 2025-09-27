@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer"
 
 export const RootLayout= ()=>{
     return (
-        <div>
+        <div className=" bg-[#EAECED]">
             <Navbar/>
             <Outlet/>
             <Footer/>

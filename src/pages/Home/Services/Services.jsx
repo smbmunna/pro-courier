@@ -51,8 +51,8 @@ const Services= ()=>{
   ];
 
     return (
-        <div className="mx-auto">
-                <div className="w-[716px] mx-auto">
+        <div className="mx-auto max-w-6xl">
+                <div className="w-[716px] mx-auto text-gray-600">
                     <h1 className="text-3xl font-semibold mt-[100px] mb-[20px]">Our Services</h1>
                     <p className="mb-[32px]">Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.</p>
                 </div>
