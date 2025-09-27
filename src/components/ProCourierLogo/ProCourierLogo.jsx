@@ -7,7 +7,7 @@ const ProCourierLogo =()=>{
                 <img src={logo} alt="pro-courier-logo" />
                 <p className='font-bold text-xl'>Pro Courier</p>
             </div>
-            <p className='w-3/4 mx-auto'>Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.</p>
+            
         </div>
     )
 }

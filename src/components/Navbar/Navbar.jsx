@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import ProCourierLogo from "../ProCourierLogo/ProCourierLogo";
 
 
 const Navbar= ()=>{
@@ -19,7 +20,7 @@ const Navbar= ()=>{
                     {links}
                 </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Pro Courier</a>
+                <ProCourierLogo/>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
