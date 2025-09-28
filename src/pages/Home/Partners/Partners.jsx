@@ -1,4 +1,5 @@
-import React from 'react';
+import './Partners.css'; 
+
 import img1 from '../../../assets/brands/amazon.png'; 
 import img2 from '../../../assets/brands/amazon_vector.png'; 
 import img3 from '../../../assets/brands/casio.png'; 
@@ -64,24 +65,6 @@ const Partners = () => {
         </div>
       </div>
       
-      <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .animate-scroll {
-          animation: scroll 20s linear infinite;
-        }
-        
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </div>
   );
 };

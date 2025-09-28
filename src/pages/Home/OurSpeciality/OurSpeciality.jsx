@@ -1,7 +1,12 @@
 import img1 from '../../../assets/live-tracking.png'
 import img2 from '../../../assets/safe-delivery.png'
 import img3 from '../../../assets/live-tracking.png'
-import React from 'react';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+//AOS
+
+
 
 const OurSpeciality = () => {
   const specialities = [
@@ -24,14 +29,14 @@ const OurSpeciality = () => {
       "description": "Our dedicated support team is available around the clock to assist you with any questions, updates, or delivery concerns—anytime you need us."
     }
   ];
+  AOS.init(); 
 
-
-  return (
+  return (    
     <div className="w-full p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-8" >
           {specialities.map((item) => (
-            <div key={item.id} className="p-8 flex bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div key={item.id} className="p-8 flex bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-duration="1000">
               {/* Left side - Image */}
               <div className="flex-shrink-0 p-4">
                 <img
@@ -45,7 +50,7 @@ const OurSpeciality = () => {
               <div className="w-px h-[150px] bg-gray-300 self-center mx-0"></div>
               
               {/* Right side - Content */}
-              <div className="flex-1 p-6 flex flex-col justify-center align-right">
+              <div className="flex-1 p-6 flex flex-col justify-center align-right" data-aos="fade-right">
                 <h3 className="font-extrabold text-2xl text-gray-800 mb-4 leading-tight text-left">
                   {item.title}
                 </h3>

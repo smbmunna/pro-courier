@@ -6,10 +6,8 @@ const Footer=()=>{
         <footer className="footer footer-horizontal footer-center bg-black text-primary-content p-10">
             <aside>
                 <ProCourierLogo/>
-                <p>
-                    <p className='w-3/4 mx-auto'>Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.</p>
-                </p>
-                <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+                 <p className='w-3/4 mx-auto'>Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.</p>
+                 <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
             </aside>
             <nav>
                 <div className="grid grid-flow-col gap-4">
