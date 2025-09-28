@@ -4,8 +4,6 @@ import img3 from '../../../assets/live-tracking.png'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-//AOS
-
 
 
 const OurSpeciality = () => {
