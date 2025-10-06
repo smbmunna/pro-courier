@@ -1,4 +1,5 @@
 import Banner from "../../../components/Banner/Banner";
+import CustomerFeedback from "../CustomerFeedback/CustomerFeedback";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import Merchant from "../Merchant/Merchant";
 import OurSpeciality from "../OurSpeciality/OurSpeciality";
@@ -14,6 +15,7 @@ const Home= ()=>{
             <Partners/>  
             <OurSpeciality/>
             <Merchant/>
+            <CustomerFeedback/>
         </div>
     )
 }
