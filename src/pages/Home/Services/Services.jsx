@@ -60,7 +60,7 @@ const Services= ()=>{
                 {
                     servicesData.map((service, index) => <ServiceCard service={service} key={index}/>)
                 }
-            </div>            
+                </div>            
         </div>
     )
 }

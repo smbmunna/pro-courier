@@ -150,7 +150,7 @@ const CustomerFeedback= ()=>{
                                 />
                                 
                                 {/* Feedback */}
-                                <p className={`text-sm leading-relaxed mb-2 ${
+                                <p className={`text-sm leading-relaxed mb-2 text-left ${
                                     isActive ? 'text-gray-700' : 'text-gray-400'
                                 }`}>
                                     {data.feedback}
