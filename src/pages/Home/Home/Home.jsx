@@ -1,4 +1,5 @@
 import Banner from "../../../components/Banner/Banner";
+import HowItWorks from "../HowItWorks/HowItWorks";
 import Merchant from "../Merchant/Merchant";
 import OurSpeciality from "../OurSpeciality/OurSpeciality";
 import Partners from "../Partners/Partners";
@@ -8,6 +9,7 @@ const Home= ()=>{
     return (
         <div>
             <Banner/>  
+            <HowItWorks/>
             <Services/>        
             <Partners/>  
             <OurSpeciality/>
