@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import {Link} from "react-router"; 
+import { Link } from "react-router";
+import GoogleLogin from "../../../components/GoogleLogin/GoogleLogin";
 
 
 
@@ -21,12 +22,22 @@ const Login = () => {
                     <input type="password" className="input" placeholder="Password" {...register('password', { required: "Password required!", minLength: { value: 4, message: 'Password must contain minimum 4 characters.' } })} />
                     {errors.password && <p>{errors.password.message}</p>}
                     <div className=" text-left"><a className="link link-hover">Forgot password?</a></div>
-                    <div className="justify-items-start">
-                        <p className="text-lg">No account? Create an account. 
+                    <div className="text-left">
+                        <p className="text-lg">No account? Create an account.
                             <button className="link link-primary ml-4"><Link to='/register'>Register</Link></button>
                         </p>
+
+                        <div className="grid">
+                            <button className="btn btn-primary mt-4 w-1/4">Login</button>
+
+
+                            <p className="mt-4 text-lg font-semibold">Or</p>
+                            <div className="mt-4">
+                                <GoogleLogin/>
+                            </div>
+
+                        </div>
                     </div>
-                    <button className="btn btn-primary mt-4 w-1/2">Login</button>
                 </fieldset>
             </form>
         </div>
