@@ -2,10 +2,14 @@ import { useForm } from "react-hook-form";
 
 
 const SendParcel = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const formSubmit = (data) => {
         console.log(data);
     }
+
+    //watch parcelType
+    const parcelType = watch('parcelType');
+
     return (
         <div className="mb-8">
             <h1 className="m-4 text-left text-[#03373D] text-2xl font-semibold">Add Parcel</h1>
@@ -55,10 +59,13 @@ const SendParcel = () => {
                         {/* parcel Weight */}
                         <label className="block text-left my-2">Parcel Weight (KG)</label>
                         <input
-                            className="border border-gray-300 rounded-md p-2 w-full"
+                            className={`border border-gray-300 rounded-md p-2 w-full ${parcelType !== 'non-document' ? 'bg-gray-100' : ''}`}
                             type='text'
+                            disabled={parcelType !== 'non-document'}
                             placeholder="Parcel Weight"
-                            {...register('parcelWeight', { required: 'Parcel weight is required!' })}
+                            {...register('parcelWeight', { required: parcelType === 'non-document' ? 'Parcel weight is required!' : false,
+                                min: parcelType==='non-document'? {value: 0.01 , message: 'Parcel weight must be greater than 0'}: undefined
+                             })}
                         />
                         {errors.parcelWeight && (
                             <p className="text-red-500 text-sm mt-2">{errors.parcelWeight.message}</p>
@@ -149,8 +156,8 @@ const SendParcel = () => {
                                     className="border border-gray-300 rounded-md p-2 w-full"
                                     type="text"
                                     placeholder="Receiver Name" />
-                                {errors.rcvName && (
-                                    <p className="text-red-500 text-sm mt-2">{errors.rcvName.message}</p>
+                                {errors?.rcvName && (
+                                    <p className="text-red-500 text-sm mt-2">{errors?.rcvName?.message}</p>
 
                                 )}
                             </div>
