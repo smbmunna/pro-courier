@@ -1,14 +1,20 @@
 import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router";
 
 
 const SendParcel = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const formSubmit = (data) => {
         console.log(data);
-    }
+    }    
 
     //watch parcelType
     const parcelType = watch('parcelType');
+
+    //load regions
+    const serviceCenters= useLoaderData(); 
+    const uniqueRegions= [...new Set(serviceCenters.map(center=>center.region))]; 
+    
 
     return (
         <div className="mb-8">
@@ -91,13 +97,14 @@ const SendParcel = () => {
                                 )}
                             </div>
                             <div>
-                                <label className="block text-left text-sm font-medium text-gray-700 mb-2">Sender Pickup Warehouse</label>
+                                <label className="block text-left text-sm font-medium text-gray-700 mb-2">Sender Region</label>
                                 <select
-                                    {...register('senderWarehouse')}
+                                    {...register('senderRegion')}
                                     className="border border-gray-300 rounded-md p-2 w-full">
-                                    <option>Select Warehouse</option>
-                                    <option>Warehouse 1</option>
-                                    <option>Warehouse 2</option>
+                                    <option>Select Region</option>
+                                    {
+                                        uniqueRegions.map((region, idx)=><option key={idx} value={region}>{region}</option>)
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -127,11 +134,11 @@ const SendParcel = () => {
                             </div>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-left text-sm font-medium text-gray-700 mb-2">Sender Region</label>
+                            <label className="block text-left text-sm font-medium text-gray-700 mb-2">Sender Service Center</label>
                             <select
-                                {...register('senderRegion')}
+                                {...register('senderCenter')}
                                 className="border border-gray-300 rounded-md p-2 w-full">
-                                <option>Select Your Region</option>
+                                <option>Select Service Center</option>
                                 <option>Region 1</option>
                                 <option>Region 2</option>
                             </select>
@@ -162,13 +169,14 @@ const SendParcel = () => {
                                 )}
                             </div>
                             <div>
-                                <label className="block text-left text-sm font-medium text-gray-700 mb-2">Receiver Delivery Warehouse</label>
+                                <label className="block text-left text-sm font-medium text-gray-700 mb-2">Receiver Region</label>
                                 <select
-                                    {...register('rcvWarehouse')}
+                                    {...register('rcvRegion')}
                                     className="border border-gray-300 rounded-md p-2 w-full">
-                                    <option>Select Warehouse</option>
-                                    <option>Warehouse 1</option>
-                                    <option>Warehouse 2</option>
+                                    <option>Select Region</option>
+                                    {
+                                        uniqueRegions.map((region, idx)=><option value={region} key={idx}>{region}</option>)
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -199,11 +207,11 @@ const SendParcel = () => {
                             </div>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-left text-sm font-medium text-gray-700 mb-2">Receiver Region</label>
+                            <label className="block text-left text-sm font-medium text-gray-700 mb-2">Receiver Service Center</label>
                             <select
-                                {...register('rcvRegion')}
+                                {...register('rcvCenter')}
                                 className="border border-gray-300 rounded-md p-2 w-full">
-                                <option>Select Your Region</option>
+                                <option>Select Service Center</option>
                                 <option>Region 1</option>
                                 <option>Region 2</option>
                             </select>
