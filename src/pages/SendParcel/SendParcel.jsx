@@ -6,15 +6,27 @@ const SendParcel = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const formSubmit = (data) => {
         console.log(data);
-    }    
+    }
 
-    //watch parcelType
+    //watch 
     const parcelType = watch('parcelType');
+    const senderRegion = watch('senderRegion');
+    const rcvRegion = watch('rcvRegion');
 
     //load regions
-    const serviceCenters= useLoaderData(); 
-    const uniqueRegions= [...new Set(serviceCenters.map(center=>center.region))]; 
-    
+    const serviceCenters = useLoaderData();
+    const uniqueRegions = [...new Set(serviceCenters.map(center => center.region))];
+
+    //load centers
+    const getCenters = (region) => {
+        const filteredServiceCenters = serviceCenters.filter(center => center.region === region);
+        const centers = [...new Set(filteredServiceCenters.map(center => center.district))];
+        return centers;
+    }
+
+    const senderCenters = getCenters(senderRegion);
+    const rcvCenters = getCenters(rcvRegion);
+    //console.log(rcvCenters); 
 
     return (
         <div className="mb-8">
@@ -69,9 +81,10 @@ const SendParcel = () => {
                             type='text'
                             disabled={parcelType !== 'non-document'}
                             placeholder="Parcel Weight"
-                            {...register('parcelWeight', { required: parcelType === 'non-document' ? 'Parcel weight is required!' : false,
-                                min: parcelType==='non-document'? {value: 0.01 , message: 'Parcel weight must be greater than 0'}: undefined
-                             })}
+                            {...register('parcelWeight', {
+                                required: parcelType === 'non-document' ? 'Parcel weight is required!' : false,
+                                min: parcelType === 'non-document' ? { value: 0.01, message: 'Parcel weight must be greater than 0' } : undefined
+                            })}
                         />
                         {errors.parcelWeight && (
                             <p className="text-red-500 text-sm mt-2">{errors.parcelWeight.message}</p>
@@ -103,7 +116,7 @@ const SendParcel = () => {
                                     className="border border-gray-300 rounded-md p-2 w-full">
                                     <option>Select Region</option>
                                     {
-                                        uniqueRegions.map((region, idx)=><option key={idx} value={region}>{region}</option>)
+                                        uniqueRegions.map((region, idx) => <option key={idx} value={region}>{region}</option>)
                                     }
                                 </select>
                             </div>
@@ -139,8 +152,9 @@ const SendParcel = () => {
                                 {...register('senderCenter')}
                                 className="border border-gray-300 rounded-md p-2 w-full">
                                 <option>Select Service Center</option>
-                                <option>Region 1</option>
-                                <option>Region 2</option>
+                                {
+                                    senderCenters.map((center, idx) => <option key={idx} value={center}>{center}</option>)
+                                }
                             </select>
                         </div>
                         <div className="mb-4" >
@@ -175,7 +189,7 @@ const SendParcel = () => {
                                     className="border border-gray-300 rounded-md p-2 w-full">
                                     <option>Select Region</option>
                                     {
-                                        uniqueRegions.map((region, idx)=><option value={region} key={idx}>{region}</option>)
+                                        uniqueRegions.map((region, idx) => <option value={region} key={idx}>{region}</option>)
                                     }
                                 </select>
                             </div>
@@ -212,8 +226,9 @@ const SendParcel = () => {
                                 {...register('rcvCenter')}
                                 className="border border-gray-300 rounded-md p-2 w-full">
                                 <option>Select Service Center</option>
-                                <option>Region 1</option>
-                                <option>Region 2</option>
+                                {
+                                    rcvCenters.map((center, idx) => <option value={center} key={idx}>{center}</option>)
+                                }
                             </select>
                         </div>
                         <div className="mb-4" >
