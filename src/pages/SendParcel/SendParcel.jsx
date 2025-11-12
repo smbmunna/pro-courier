@@ -4,8 +4,28 @@ import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const formSubmit = (data) => {
-        console.log(data);
+    const formSubmit = (data) => {        
+        //costing Calculation
+        let totalCost = 0;
+        const isDoc = data.parcelType === 'document' ? true : false;
+        const isSameCenter = data.senderCenter == data.rcvCenter ? true : false;
+        const wghUpto3kg = data.parcelWeight <= 3 ? true : false;
+        const extraWgh = data.parcelWeight - 3;
+        //If document
+        if (isDoc) {
+            totalCost = isSameCenter ? 60 : 80;
+        }
+        //if non-document
+        if (!isDoc) {
+            if (wghUpto3kg) {
+                totalCost = isSameCenter ? 110 : 150;
+            }
+            if (!wghUpto3kg) {
+                totalCost = isSameCenter ? 110 + (40 * extraWgh) : 150 + (40 * extraWgh) + 40;
+            }
+        }
+        console.log(totalCost); 
+
     }
 
     //watch 
@@ -26,7 +46,9 @@ const SendParcel = () => {
 
     const senderCenters = getCenters(senderRegion);
     const rcvCenters = getCenters(rcvRegion);
-    //console.log(rcvCenters); 
+
+
+
 
     return (
         <div className="mb-8">
