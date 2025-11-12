@@ -1,10 +1,25 @@
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 
 const SendParcel = () => {
+    const { user } = useAuth();
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const formSubmit = (data) => {        
+    const formSubmit = (data) => {
+        const createdBy = user.email;
+        const creationDate = new Date().toISOString();
+        //Tracking ID
+        const generateTrackingId = () => {
+            const prefix = 'TRK';
+            const timestamp = Date.now().toString(36).toUpperCase();
+            const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+            return `${prefix}-${timestamp}-${random}`;
+        };
+        const trackingId = generateTrackingId();
+        // Output: "TRK-LX9K3Q8-4F2A9B"
+
         //costing Calculation
         let totalCost = 0;
         const isDoc = data.parcelType === 'document' ? true : false;
@@ -24,8 +39,9 @@ const SendParcel = () => {
                 totalCost = isSameCenter ? 110 + (40 * extraWgh) : 150 + (40 * extraWgh) + 40;
             }
         }
-        console.log(totalCost); 
 
+        const formData = { ...data, totalCost, createdBy, creationDate, trackingId };
+        console.log(formData);
     }
 
     //watch 
