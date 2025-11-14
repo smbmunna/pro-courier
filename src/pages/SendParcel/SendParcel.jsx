@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const SendParcel = () => {
@@ -10,6 +11,8 @@ const SendParcel = () => {
     const formSubmit = (data) => {
         const createdBy = user.email;
         const creationDate = new Date().toISOString();
+        const paymentStatus = 'not-paid';
+        const deliveryStatus = 'not-received';
         //Tracking ID
         const generateTrackingId = () => {
             const prefix = 'TRK';
@@ -40,8 +43,11 @@ const SendParcel = () => {
             }
         }
 
-        const formData = { ...data, totalCost, createdBy, creationDate, trackingId };
+        const formData = { ...data, totalCost, createdBy, creationDate, trackingId, paymentStatus, deliveryStatus };
         console.log(formData);
+        //Cost break down
+        //const costBreakdown = calculateTotalCost(data);
+        showSuccessAlert(data, trackingId, isSameCenter, extraWgh, totalCost);
     }
 
     //watch 
@@ -63,8 +69,27 @@ const SendParcel = () => {
     const senderCenters = getCenters(senderRegion);
     const rcvCenters = getCenters(rcvRegion);
 
-
-
+    //Sweet alert section
+    const showSuccessAlert = (data, trackingId, isSameCenter, extraWgh, totalCost) => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Parcel Submitted!',
+            html: `
+      <div style="text-align: left;">
+        <p><strong>Tracking ID:</strong> <span style="color: #2563eb;">${trackingId}</span></p>
+        <p><strong>Parcel Type:</strong> ${data.parcelType === 'document' ? 'Document' : 'Non-Document'}</p>
+        <p><strong>From:</strong> ${data.senderCenter}, ${data.senderRegion}</p>
+        <p><strong>To:</strong> ${data.rcvCenter}, ${data.rcvRegion}</p>
+        <p><strong>(${isSameCenter ? 'Inside same city' : 'To different city'})</strong><p>
+        ${data.parcelType === 'non-document' ? `<p><strong>Weight:</strong> ${data.parcelWeight} KG</p>` : ''}
+        <hr>
+        <p><strong>Total Cost:</strong> <span style="color: #059669; font-size: 20px;">৳${totalCost.toFixed(2)}</span></p>
+      </div>
+    `,
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2563eb'
+        });
+    };
 
     return (
         <div className="mb-8">
