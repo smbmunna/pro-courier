@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const SendParcel = () => {
     const { user } = useAuth();
+    const axiosSecure= useAxiosSecure(); 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const formSubmit = (data) => {
@@ -44,10 +46,15 @@ const SendParcel = () => {
         }
 
         const formData = { ...data, totalCost, createdBy, creationDate, trackingId, paymentStatus, deliveryStatus };
-        console.log(formData);
+        axiosSecure.post('/parcels',formData)
+        .then(res=>{
+           if(res.data.insertedId){
+            showSuccessAlert(data, trackingId, isSameCenter, extraWgh, totalCost);
+           }
+        })
         //Cost break down
         //const costBreakdown = calculateTotalCost(data);
-        showSuccessAlert(data, trackingId, isSameCenter, extraWgh, totalCost);
+        
     }
 
     //watch 
