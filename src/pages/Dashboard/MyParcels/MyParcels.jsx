@@ -16,7 +16,7 @@ const MyParcels = () => {
         queryFn: fetchParcels
     })
 
-    //parse date
+    //parse date :
     const parseDate= (date)=>{
         return (new Date(date).toLocaleDateString()); 
     }
