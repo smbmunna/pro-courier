@@ -37,11 +37,9 @@ const DashboardLayout = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
 
-                    <NavLink to="/">
-                        <div className="m-8">
-                            <ProCourierLogo />
-                        </div>
-                    </NavLink>
+                    <div className="m-8">
+                        <ProCourierLogo />
+                    </div>
                     <ul className="menu bg-base-200 min-h-full w-80 p-4">
                         {/* Sidebar content here */}
                         <li><NavLink to="/">Home</NavLink></li>

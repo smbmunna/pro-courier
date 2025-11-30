@@ -11,14 +11,20 @@ const MyParcels = () => {
         return response.data;
     }
 
-    const { data: parcels = [] } = useQuery({
+    const { data: parcels = [], refetch } = useQuery({
         queryKey: ['my-parcels', user.email],
         queryFn: fetchParcels
     })
 
     //parse date :
-    const parseDate= (date)=>{
-        return (new Date(date).toLocaleDateString()); 
+    const parseDate = (date) => {
+        return (new Date(date).toLocaleDateString());
+    }
+
+    // Delete parcel
+    const handleDelete= async (id)=>{
+        const res= await axiosSecure.delete(`parcel/${id}`); 
+        refetch(); 
     }
 
 
@@ -39,19 +45,21 @@ const MyParcels = () => {
                             <th>To</th>
                             <th>Cost</th>
                             <th>Creation Time</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* row 1 */}
                         {
-                            parcels.map(par => <tr>
-                                <th>1</th>
+                            parcels.map((par, idx) => <tr key={par._id}>
+                                <th>{idx + 1}</th>
                                 <td>{par.parcelName}</td>
                                 <td>{par.parcelType}</td>
                                 <td>{par.senderAddress}</td>
                                 <td>{par.rcvAddress}</td>
                                 <td>{par.totalCost}</td>
                                 <td>{parseDate(par.creationDate)}</td>
+                                <td><button onClick={()=>handleDelete(par._id)} className="btn btn-soft btn-xs btn-secondary">Delete</button></td>
                             </tr>)
                         }
 
