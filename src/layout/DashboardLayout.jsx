@@ -1,5 +1,5 @@
-import { Outlet } from "react-router";
-
+import { NavLink, Outlet } from "react-router";
+import ProCourierLogo from '../components/ProCourierLogo/ProCourierLogo'
 
 const DashboardLayout = () => {
     return (
@@ -31,15 +31,21 @@ const DashboardLayout = () => {
                     </div>
                     {/* Page content here */}
                     <div>
-                        <Outlet/>
+                        <Outlet />
                     </div>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+
+                    <NavLink to="/">
+                        <div className="m-8">
+                            <ProCourierLogo />
+                        </div>
+                    </NavLink>
                     <ul className="menu bg-base-200 min-h-full w-80 p-4">
                         {/* Sidebar content here */}
-                        <li><a>Sidebar Item 1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
+                        <li><NavLink to="/">Home</NavLink></li>
+                        <li><NavLink to="/dashboard/myParcels">My Parcels</NavLink></li>
                     </ul>
                 </div>
             </div>
